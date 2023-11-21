@@ -18,6 +18,7 @@ import lombok.Setter;
 public class Professor extends Usuario {
 
     private Integer professor_carga;
+    private String curso;
     private String disciplina;
     private Contratacao contratacao;
 }
