@@ -22,6 +22,7 @@ import com.ger_professores.sistema.dtos.responses.ProfessorResponse;
 import com.ger_professores.sistema.models.Professor;
 import com.ger_professores.sistema.services.ProfessorService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -49,7 +50,7 @@ public class ProfessorController {
     }
 
     @PostMapping
-    public ResponseEntity<ProfessorResponse> save(@RequestBody ProfessorRequest professorRequest) {
+    public ResponseEntity<ProfessorResponse> save(@RequestBody @Valid ProfessorRequest professorRequest) {
         Professor professor = new ModelMapper().map(professorRequest, Professor.class);
         professor = professorService.save(professor);
         ProfessorResponse professorResponse = new ModelMapper().map(professor, ProfessorResponse.class);
@@ -65,7 +66,7 @@ public class ProfessorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProfessorResponse> update(@PathVariable Long id,
+    public ResponseEntity<ProfessorResponse> update(@PathVariable @Valid Long id,
             @RequestBody ProfessorRequest professorRequest) {
         Optional<Professor> profeOptional = professorService.findById(id);
         Professor professor = new ModelMapper().map(professorRequest, Professor.class);

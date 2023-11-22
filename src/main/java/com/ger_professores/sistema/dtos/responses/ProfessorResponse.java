@@ -11,8 +11,6 @@ public class ProfessorResponse {
     private String cpf;
     private String email;
 
-    private Integer professor_carga;
-    private String curso;
     private String disciplina;
     private Contratacao contratacao;
 
