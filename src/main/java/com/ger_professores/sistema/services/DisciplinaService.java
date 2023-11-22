@@ -38,4 +38,8 @@ public class DisciplinaService {
     public void delete(Disciplina disciplina) {
         disciplinaRepository.delete(disciplina);
     }
+
+    public List<Disciplina> findByProfessor(Long idProfessor) {
+        return disciplinaRepository.findByProfessorId(idProfessor);
+    }
 }

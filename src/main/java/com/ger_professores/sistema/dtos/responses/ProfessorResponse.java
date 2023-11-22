@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class ProfessorResponse {
 
+    private Long id;
     private String nome;
     private String cpf;
     private String email;
