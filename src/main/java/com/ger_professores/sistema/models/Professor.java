@@ -2,6 +2,7 @@ package com.ger_professores.sistema.models;
 
 import com.ger_professores.sistema.enums.Contratacao;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -17,8 +18,10 @@ import lombok.Setter;
 @Table(name = "professor")
 public class Professor extends Usuario {
 
+    @Column(nullable = false)
     private Integer professor_carga;
-    private String curso;
+    @Column(nullable = false)
     private String disciplina;
+    @Column(nullable = false)
     private Contratacao contratacao;
 }
