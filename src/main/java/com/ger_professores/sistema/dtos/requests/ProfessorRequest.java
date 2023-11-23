@@ -11,6 +11,8 @@ import lombok.Data;
 @Data
 public class ProfessorRequest {
 
+
+    private Long id;
     @NotBlank
     private String nome;
     @NotBlank
