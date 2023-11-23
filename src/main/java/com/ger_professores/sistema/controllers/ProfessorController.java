@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping(("/api/professor"))
+@RequestMapping("/api/professor")
 @RequiredArgsConstructor
 public class ProfessorController {
 
@@ -36,18 +36,45 @@ public class ProfessorController {
     @GetMapping
     public ResponseEntity<List<ProfessorResponse>> findAll() {
         List<Professor> professores = professorService.findAll();
-        List<ProfessorResponse> usuarioResponses = professores.stream()
+        List<ProfessorResponse> professorResponses = professores.stream()
                 .map(a -> new ModelMapper().map(a, ProfessorResponse.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioResponses);
+        return ResponseEntity.status(HttpStatus.OK).body(professorResponses);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProfessorResponse> findById(@PathVariable Long id) {
         Optional<Professor> professorOptional = professorService.findById(id);
-        ProfessorResponse professorResponse = new ModelMapper().map(professorOptional, ProfessorResponse.class);
+        ProfessorResponse professorResponse = new ModelMapper().map(professorOptional.orElseThrow(), ProfessorResponse.class);
         return ResponseEntity.status(HttpStatus.OK).body(professorResponse);
     }
+
+    // @GetMapping("/porDisciplinaId/{disciplinaId}")
+    // public ResponseEntity<List<ProfessorResponse>> findProfessorsByDisciplinaId(@PathVariable Long disciplinaId) {
+    //     List<Professor> professores = professorService.findProfessorByDisciplinaId(disciplinaId);
+    //     List<ProfessorResponse> professorResponses = professores.stream()
+    //             .map(a -> new ModelMapper().map(a, ProfessorResponse.class))
+    //             .collect(Collectors.toList());
+    //     return ResponseEntity.status(HttpStatus.OK).body(professorResponses);
+    // }
+
+    // @GetMapping("/porCursoId/{cursoId}")
+    // public ResponseEntity<List<ProfessorResponse>> findProfessorsByCursoId(@PathVariable Long cursoId) {
+    //     List<Professor> professores = professorService.findProfessorByCursoId(cursoId);
+    //     List<ProfessorResponse> professorResponses = professores.stream()
+    //             .map(a -> new ModelMapper().map(a, ProfessorResponse.class))
+    //             .collect(Collectors.toList());
+    //     return ResponseEntity.status(HttpStatus.OK).body(professorResponses);
+    // }
+
+    // @GetMapping("/porTrimestreId/{trimestreId}")
+    // public ResponseEntity<List<ProfessorResponse>> findProfessorsByTrimestreId(@PathVariable Long trimestreId) {
+    //     List<Professor> professores = professorService.findProfessorByTrimestreId(trimestreId);
+    //     List<ProfessorResponse> professorResponses = professores.stream()
+    //             .map(a -> new ModelMapper().map(a, ProfessorResponse.class))
+    //             .collect(Collectors.toList());
+    //     return ResponseEntity.status(HttpStatus.OK).body(professorResponses);
+    // }
 
     @PostMapping
     public ResponseEntity<ProfessorResponse> save(@RequestBody @Valid ProfessorRequest professorRequest) {
@@ -60,17 +87,17 @@ public class ProfessorController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         Optional<Professor> professorOptional = professorService.findById(id);
-        Professor professor = new ModelMapper().map(professorOptional, Professor.class);
+        Professor professor = new ModelMapper().map(professorOptional.orElseThrow(), Professor.class);
         professorService.delete(professor);
         return ResponseEntity.status(HttpStatus.OK).body("Professor deletado com sucesso.");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProfessorResponse> update(@PathVariable @Valid Long id,
-            @RequestBody ProfessorRequest professorRequest) {
+            @RequestBody  ProfessorRequest professorRequest) {
         Optional<Professor> profeOptional = professorService.findById(id);
         Professor professor = new ModelMapper().map(professorRequest, Professor.class);
-        professor.setId(profeOptional.get().getId());
+        professor.setId(profeOptional.orElseThrow().getId());
         professorService.save(professor);
         ProfessorResponse professorResponse = new ModelMapper().map(professor, ProfessorResponse.class);
         return ResponseEntity.status(HttpStatus.OK).body(professorResponse);

@@ -29,6 +29,14 @@ public class CursoService {
         return optionalCurso;
     }
 
+    // public List<Curso> findByTrimestreId(Long trimestreId) {
+    //     return cursoRepository.findByTrimestreId(trimestreId);
+    // }
+
+    // public List<Curso> findByDisciplinaId(Long disciplinaId) {
+    //     return cursoRepository.findByDisciplinasDisciplinaId(disciplinaId);
+    // }
+
     @Transactional
     public Curso save(Curso curso) {
         return cursoRepository.save(curso);

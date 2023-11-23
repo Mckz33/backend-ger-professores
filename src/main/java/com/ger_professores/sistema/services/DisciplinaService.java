@@ -39,7 +39,11 @@ public class DisciplinaService {
         disciplinaRepository.delete(disciplina);
     }
 
-    public List<Disciplina> findByProfessor(Long idProfessor) {
-        return disciplinaRepository.findByProfessorId(idProfessor);
-    }
+    // public List<Disciplina> findByCursoId(Long cursoId) {
+    //     return disciplinaRepository.findByCursoId(cursoId);
+    // }
+
+    // public List<Disciplina> findByProfessorId(Long professorId) {
+    //     return disciplinaRepository.findByProfessoresId(professorId);
+    // }
 }
