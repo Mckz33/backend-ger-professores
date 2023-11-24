@@ -37,7 +37,7 @@ public class Curso {
 
     @OneToOne
     @JoinColumn(name = "id")
-    private Professor coordenador;
+    private Usuario coordenador;
     
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<Disciplina> disciplinas;

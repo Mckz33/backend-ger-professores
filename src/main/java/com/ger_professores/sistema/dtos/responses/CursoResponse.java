@@ -23,7 +23,7 @@ public class CursoResponse {
 
     @Valid
     @Nullable
-    private ProfessorResponse coordenador;
+    private UsuarioResponse coordenador;
 
     @Valid
     @Nullable

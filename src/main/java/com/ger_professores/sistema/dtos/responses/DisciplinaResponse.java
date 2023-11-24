@@ -23,7 +23,7 @@ public class DisciplinaResponse {
 
     @Valid
     @Nullable
-    private List<ProfessorResponse> professores;
+    private List<UsuarioResponse> professores;
     
     @Valid
     @Nullable
