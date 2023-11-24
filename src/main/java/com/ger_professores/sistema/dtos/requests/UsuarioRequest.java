@@ -13,7 +13,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class ProfessorRequest {
+public class UsuarioRequest {
 
     @NotBlank
     private String nome;

@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class ProfessorResponse {
+public class UsuarioResponse {
 
     @NotNull
     private Long id;

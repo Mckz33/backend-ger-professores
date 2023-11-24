@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.ger_professores.sistema.models.Professor;
+import com.ger_professores.sistema.models.Usuario;
 
-public interface ProfessorRepository extends JpaRepository<Professor, Long> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     // // Corrigindo a consulta personalizada
     // @Query("SELECT p FROM Professor p JOIN p.disciplinas d WHERE d.disciplina_id = :disciplinaId")
     // List<Professor> findByDisciplinasId(@Param("disciplinaId") Long disciplinaId);

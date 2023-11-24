@@ -43,6 +43,6 @@ public class Disciplina {
     @JoinTable(name = "disciplina_professor",
                joinColumns = @JoinColumn(name = "disciplina_id"),
                inverseJoinColumns = @JoinColumn(name = "professor_id"))
-    private List<Professor> professores;
+    private List<Usuario> professores;
 
 }
