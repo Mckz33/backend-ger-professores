@@ -27,8 +27,4 @@ public class DisciplinaRequest {
     @Valid
     @Nullable
     private CursoResponse curso;
-
-    @Valid
-    @Nullable
-    private List<CursoDisciplinaProfessorRequest> cursoDisciplinaProfessores;
 }

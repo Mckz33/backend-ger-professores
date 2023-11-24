@@ -3,6 +3,7 @@ package com.ger_professores.sistema.dtos.responses;
 import java.util.List;
 
 import com.ger_professores.sistema.enums.Contratacao;
+import com.ger_professores.sistema.enums.Tipo;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
@@ -24,6 +25,9 @@ public class ProfessorResponse {
 
     @NotBlank
     private String email;
+    
+    @NotNull
+    private Tipo tipo;
 
     @NotNull
     private Integer professor_carga;
@@ -34,8 +38,4 @@ public class ProfessorResponse {
     @Valid
     @Nullable
     private List<DisciplinaResponse> disciplinas;
-
-    @Valid
-    @Nullable
-    private List<CursoDisciplinaProfessorResponse> cursoDisciplinaProfessores;
 }

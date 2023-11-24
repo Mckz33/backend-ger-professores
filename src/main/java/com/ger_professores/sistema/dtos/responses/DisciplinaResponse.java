@@ -28,8 +28,4 @@ public class DisciplinaResponse {
     @Valid
     @Nullable
     private CursoResponse curso;
-
-    @Valid
-    @Nullable
-    private List<CursoDisciplinaProfessorResponse> cursoDisciplinaProfessores;
 }
