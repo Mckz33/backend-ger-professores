@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "professor")
-public class Professor {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

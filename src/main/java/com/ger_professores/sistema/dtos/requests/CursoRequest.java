@@ -3,7 +3,7 @@ package com.ger_professores.sistema.dtos.requests;
 import java.util.List;
 
 import com.ger_professores.sistema.dtos.responses.DisciplinaResponse;
-import com.ger_professores.sistema.dtos.responses.ProfessorResponse;
+import com.ger_professores.sistema.dtos.responses.UsuarioResponse;
 import com.ger_professores.sistema.dtos.responses.TrimestreResponse;
 
 import jakarta.annotation.Nullable;
@@ -23,13 +23,9 @@ public class CursoRequest {
 
     @Valid
     @Nullable
-    private ProfessorResponse coordenador;
+    private UsuarioResponse coordenador;
 
     @Valid
     @Nullable
     private List<DisciplinaResponse> disciplinas;
-
-    @Valid
-    @Nullable
-    private List<CursoDisciplinaProfessorRequest> cursoDisciplinaProfessores;
 }

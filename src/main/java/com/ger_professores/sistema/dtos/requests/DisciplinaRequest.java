@@ -4,7 +4,7 @@ package com.ger_professores.sistema.dtos.requests;
 import java.util.List;
 
 import com.ger_professores.sistema.dtos.responses.CursoResponse;
-import com.ger_professores.sistema.dtos.responses.ProfessorResponse;
+import com.ger_professores.sistema.dtos.responses.UsuarioResponse;
 import io.micrometer.common.lang.Nullable;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -22,13 +22,9 @@ public class DisciplinaRequest {
 
     @Valid
     @Nullable
-    private List<ProfessorResponse> professores;
+    private List<UsuarioResponse> professores;
 
     @Valid
     @Nullable
     private CursoResponse curso;
-
-    @Valid
-    @Nullable
-    private List<CursoDisciplinaProfessorRequest> cursoDisciplinaProfessores;
 }
