@@ -44,27 +44,10 @@ public class DisciplinaController {
     @GetMapping("/{id}")
     public ResponseEntity<DisciplinaResponse> findById(@PathVariable Long id) {
         Optional<Disciplina> disciplinaOptional = disciplinaService.findById(id);
-        DisciplinaResponse disciplinaResponse = new ModelMapper().map(disciplinaOptional.orElseThrow(), DisciplinaResponse.class);
+        DisciplinaResponse disciplinaResponse = new ModelMapper().map(disciplinaOptional.orElseThrow(),
+                DisciplinaResponse.class);
         return ResponseEntity.status(HttpStatus.OK).body(disciplinaResponse);
     }
-
-    // @GetMapping("/porCursoId/{cursoId}")
-    // public ResponseEntity<List<DisciplinaResponse>> findByCursoId(@PathVariable Long cursoId) {
-    //     List<Disciplina> disciplinas = disciplinaService.findByCursoId(cursoId);
-    //     List<DisciplinaResponse> disciplinaResponses = disciplinas.stream()
-    //             .map(a -> new ModelMapper().map(a, DisciplinaResponse.class))
-    //             .collect(Collectors.toList());
-    //     return ResponseEntity.status(HttpStatus.OK).body(disciplinaResponses);
-    // }
-
-    // @GetMapping("/porProfessorId/{professorId}")
-    // public ResponseEntity<List<DisciplinaResponse>> findByProfessorId(@PathVariable Long professorId) {
-    //     List<Disciplina> disciplinas = disciplinaService.findByProfessorId(professorId);
-    //     List<DisciplinaResponse> disciplinaResponses = disciplinas.stream()
-    //             .map(a -> new ModelMapper().map(a, DisciplinaResponse.class))
-    //             .collect(Collectors.toList());
-    //     return ResponseEntity.status(HttpStatus.OK).body(disciplinaResponses);
-    // }
 
     @PostMapping
     public ResponseEntity<DisciplinaResponse> save(@RequestBody @Valid DisciplinaRequest disciplinaRequest) {
@@ -84,7 +67,7 @@ public class DisciplinaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<DisciplinaResponse> update(@PathVariable @Valid Long id,
-            @RequestBody  DisciplinaRequest disciplinaRequest) {
+            @RequestBody DisciplinaRequest disciplinaRequest) {
         Optional<Disciplina> disciplinaOptional = disciplinaService.findById(id);
         Disciplina disciplina = new ModelMapper().map(disciplinaRequest, Disciplina.class);
         disciplina.setDisciplina_id(disciplinaOptional.orElseThrow().getDisciplina_id());

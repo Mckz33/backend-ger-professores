@@ -49,24 +49,6 @@ public class CursoController {
         return ResponseEntity.status(HttpStatus.OK).body(cursoResponse);
     }
 
-    // @GetMapping("/porTrimestreId/{trimestreId}")
-    // public ResponseEntity<List<CursoResponse>> findByTrimestreId(@PathVariable Long trimestreId) {
-    //     List<Curso> cursos = cursoService.findByTrimestreId(trimestreId);
-    //     List<CursoResponse> cursoResponses = cursos.stream()
-    //             .map(a -> new ModelMapper().map(a, CursoResponse.class))
-    //             .collect(Collectors.toList());
-    //     return ResponseEntity.status(HttpStatus.OK).body(cursoResponses);
-    // }
-
-    // @GetMapping("/porDisciplinaId/{disciplinaId}")
-    // public ResponseEntity<List<CursoResponse>> findByDisciplinaId(@PathVariable Long disciplinaId) {
-    //     List<Curso> cursos = cursoService.findByDisciplinaId(disciplinaId);
-    //     List<CursoResponse> cursoResponses = cursos.stream()
-    //             .map(a -> new ModelMapper().map(a, CursoResponse.class))
-    //             .collect(Collectors.toList());
-    //     return ResponseEntity.status(HttpStatus.OK).body(cursoResponses);
-    // }
-
     @PostMapping
     public ResponseEntity<CursoResponse> save(@RequestBody @Valid CursoRequest cursoRequest) {
         Curso curso = new ModelMapper().map(cursoRequest, Curso.class);
