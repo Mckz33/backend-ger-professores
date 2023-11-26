@@ -21,11 +21,12 @@ import com.ger_professores.sistema.dtos.requests.DisciplinaRequest;
 import com.ger_professores.sistema.dtos.responses.DisciplinaResponse;
 import com.ger_professores.sistema.models.Disciplina;
 import com.ger_professores.sistema.services.DisciplinaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping(("/api/disciplina"))
+@RequestMapping("/api/disciplina")
 @RequiredArgsConstructor
 public class DisciplinaController {
 
@@ -43,12 +44,13 @@ public class DisciplinaController {
     @GetMapping("/{id}")
     public ResponseEntity<DisciplinaResponse> findById(@PathVariable Long id) {
         Optional<Disciplina> disciplinaOptional = disciplinaService.findById(id);
-        DisciplinaResponse disciplinaResponse = new ModelMapper().map(disciplinaOptional, DisciplinaResponse.class);
+        DisciplinaResponse disciplinaResponse = new ModelMapper().map(disciplinaOptional.orElseThrow(),
+                DisciplinaResponse.class);
         return ResponseEntity.status(HttpStatus.OK).body(disciplinaResponse);
     }
 
     @PostMapping
-    public ResponseEntity<DisciplinaResponse> save(@RequestBody DisciplinaRequest disciplinaRequest) {
+    public ResponseEntity<DisciplinaResponse> save(@RequestBody @Valid DisciplinaRequest disciplinaRequest) {
         Disciplina disciplina = new ModelMapper().map(disciplinaRequest, Disciplina.class);
         disciplina = disciplinaService.save(disciplina);
         DisciplinaResponse disciplinaResponse = new ModelMapper().map(disciplina, DisciplinaResponse.class);
@@ -57,18 +59,18 @@ public class DisciplinaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
-        Optional<Disciplina> disciplinarOptional = disciplinaService.findById(id);
-        Disciplina disciplina = new ModelMapper().map(disciplinarOptional, Disciplina.class);
+        Optional<Disciplina> disciplinaOptional = disciplinaService.findById(id);
+        Disciplina disciplina = new ModelMapper().map(disciplinaOptional.orElseThrow(), Disciplina.class);
         disciplinaService.delete(disciplina);
         return ResponseEntity.status(HttpStatus.OK).body("Disciplina deletada com sucesso.");
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DisciplinaResponse> update(@PathVariable Long id,
+    public ResponseEntity<DisciplinaResponse> update(@PathVariable @Valid Long id,
             @RequestBody DisciplinaRequest disciplinaRequest) {
-        Optional<Disciplina> profeOptional = disciplinaService.findById(id);
+        Optional<Disciplina> disciplinaOptional = disciplinaService.findById(id);
         Disciplina disciplina = new ModelMapper().map(disciplinaRequest, Disciplina.class);
-        disciplina.setDisciplina_id(profeOptional.get().getDisciplina_id());
+        disciplina.setDisciplina_id(disciplinaOptional.orElseThrow().getDisciplina_id());
         disciplinaService.save(disciplina);
         DisciplinaResponse disciplinaResponse = new ModelMapper().map(disciplina, DisciplinaResponse.class);
         return ResponseEntity.status(HttpStatus.OK).body(disciplinaResponse);

@@ -28,6 +28,7 @@ public class Trimestre {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long trimestre_id;
+    
     @Column(nullable = false)
     private String descricao;
 

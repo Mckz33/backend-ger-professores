@@ -2,15 +2,30 @@ package com.ger_professores.sistema.dtos.requests;
 
 import java.util.List;
 
+import com.ger_professores.sistema.dtos.responses.DisciplinaResponse;
+import com.ger_professores.sistema.dtos.responses.UsuarioResponse;
+import com.ger_professores.sistema.dtos.responses.TrimestreResponse;
 
+import jakarta.annotation.Nullable;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
 public class CursoRequest {
 
+    @NotBlank(message = "O nome do curso não pode estar em branco")
     private String curso_nome;
 
-    private TrimestreRequest trimestres;
-    private CoordenadorRequest coordenador;
-    private List<DisciplinaRequest> disciplinas;
+    @Valid
+    @Nullable
+    private TrimestreResponse trimestres;
+
+    @Valid
+    @Nullable
+    private UsuarioResponse coordenador;
+
+    @Valid
+    @Nullable
+    private List<DisciplinaResponse> disciplinas;
 }
