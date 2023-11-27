@@ -35,18 +35,26 @@ public class WebSecurityConfiguration {
         .authorizeHttpRequests()
         .requestMatchers("/authenticate", "/sign-up")
         .permitAll()
+        .requestMatchers(
+          "/api/v1/auth/**",
+          "/v2/api-docs",
+          "/v3/api-docs",
+          "/v3/api-docs/**",
+          "/swagger-resources",
+          "/swagger-resources/**",
+          "/configuration/ui",
+          "/configuration/security",
+          "/swagger-ui/**",
+          "/webjars/**",
+          "/swagger-ui.html"
+        )
+        .permitAll() // Added permission for swagger-ui
         .and()
-        .authorizeHttpRequests()
-        .requestMatchers("/api/**")
-        .authenticated()
-        .and()
-        .authorizeHttpRequests()
-        .requestMatchers("/api/**")
-        .hasAnyAuthority("ADMIN")
-        .requestMatchers("/api/admin")
-        .hasAnyAuthority("ADMIN")
+        .authorizeHttpRequests() // Changed to use hasAnyRole instead of hasAnyAuthority
+        .requestMatchers("/api/admin/**")
+        .hasAnyRole("ADMIN")
         .requestMatchers("/api/coordenador")
-        .hasAnyAuthority("COORDENADOR")
+        .hasAnyRole("COORDENADOR")
         .anyRequest()
         .authenticated()
         .and()
