@@ -1,7 +1,5 @@
 package com.ger_professores.sistema.models;
 
-import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,23 +21,19 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "curso")
 public class Curso {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long curso_id;
-    
-    @Column(nullable = false)
-    private String curso_nome;
 
-    @ManyToOne
-    @JoinColumn(name = "trimestre_id")
-    private Trimestre trimestre;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long curso_id;
 
-    @OneToOne
-    @JoinColumn(name = "id")
-    private Usuario coordenador;
-    
-    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
-    private List<Disciplina> disciplinas;
+  @Column(nullable = false)
+  private String curso_nome;
 
+  @ManyToOne
+  @JoinColumn(name = "trimestre_id")
+  private Trimestre trimestre;
+
+  @OneToOne
+  @JoinColumn(name = "id")
+  private Usuario usuario;
 }

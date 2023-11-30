@@ -4,6 +4,7 @@ import com.ger_professores.sistema.filters.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -34,6 +35,14 @@ public class WebSecurityConfiguration {
         .disable()
         .authorizeHttpRequests()
         .requestMatchers("/authenticate", "/sign-up")
+        .permitAll()
+        .requestMatchers(HttpMethod.GET, "/api/**")
+        .permitAll()
+        .requestMatchers(HttpMethod.POST, "/api/**")
+        .permitAll()
+        .requestMatchers(HttpMethod.PUT, "/api/**")
+        .permitAll()
+        .requestMatchers(HttpMethod.DELETE, "/api/**")
         .permitAll()
         .requestMatchers(
           "/api/v1/auth/**",
