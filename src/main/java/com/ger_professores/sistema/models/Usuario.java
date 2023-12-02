@@ -2,49 +2,62 @@ package com.ger_professores.sistema.models;
 
 import com.ger_professores.sistema.enums.Contratacao;
 import com.ger_professores.sistema.enums.Tipo;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  @Column(name = "usuario_id")
+  private Long usuarioId;
 
-  @Column(nullable = false)
-  private String name;
+  @Column(name = "usuario_nome")
+  private String usuarioNome;
 
-  @Column(nullable = false)
-  private String cpf;
+  @Column(name = "usuario_cpf")
+  private String usuarioCpf;
 
-  @Column(nullable = false)
-  private String email;
+  @Column(name = "usuario_email")
+  private String usuarioEmail;
 
-  @Column(nullable = false)
-  private Tipo tipo;
+  @Column(name = "professor_carga")
+  private Integer professorCarga;
 
-  @Column(nullable = false)
-  private Integer professor_carga;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tipo_contratacao")
+  private Contratacao tipoContratacao;
 
-  @ManyToMany(mappedBy = "usuarios")
-  private List<Disciplina> disciplinas;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tipo_usuario")
+  private Tipo tipoUsuario;
 
-  @Column(nullable = false)
-  private Contratacao contratacao;
+  @Column(name = "cursos_escolhidos")
+  private List<String> curEscolhidos;
+
+  @Column(name = "disciplinas_escolhidas")
+  private List<String> discEscolhidas;
 }

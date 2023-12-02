@@ -7,13 +7,16 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class DisciplinaService {
 
-  private final DisciplinaRepository disciplinaRepository;
+	@Autowired
+  DisciplinaRepository disciplinaRepository;
 
   public List<Disciplina> findAll() {
     return disciplinaRepository.findAll();

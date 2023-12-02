@@ -1,40 +1,28 @@
 package com.ger_professores.sistema.dtos.requests;
 
-import java.util.List;
-
-import com.ger_professores.sistema.dtos.responses.DisciplinaResponse;
 import com.ger_professores.sistema.enums.Contratacao;
 import com.ger_professores.sistema.enums.Tipo;
-
-import jakarta.annotation.Nullable;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import lombok.Data;
 
 @Data
 public class UsuarioRequest {
 
-    @NotBlank
-    private String nome;
+  private Long usuarioId;
 
-    @NotBlank
-    private String cpf;
+  private String usuarioNome;
 
-    @NotBlank
-    private String email;
+  private String usuarioCpf;
 
-    @NotNull
-    private Tipo tipo;
+  private String usuarioEmail;
 
-    @NotNull
-    private Integer professor_carga;
+  private Integer professorCarga;
 
-    @NotNull
-    private Contratacao contratacao;
+  private Contratacao tipoContratacao;
 
-    @Valid
-    @Nullable
-    private List<DisciplinaResponse> disciplinas;
-    
+  private Tipo tipoUsuario;
+
+  private List<String> curEscolhidos;
+
+  private List<String> discEscolhidas;
 }

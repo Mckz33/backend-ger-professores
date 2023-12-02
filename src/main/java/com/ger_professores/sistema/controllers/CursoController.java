@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,15 +24,14 @@ import com.ger_professores.sistema.models.Curso;
 import com.ger_professores.sistema.services.CursoService;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/curso")
-@RequiredArgsConstructor
 public class CursoController {
 
-    private final CursoService cursoService;
+	@Autowired
+    CursoService cursoService;
 
     @GetMapping
     public ResponseEntity<List<CursoResponse>> findAll() {

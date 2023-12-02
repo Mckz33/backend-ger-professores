@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class ErrorMessage {
 
-    private String titulo;
+  private String titulo;
 
-    private Integer status;
+  private Integer status;
 
-    private String mensagem;
-
+  private String mensagem;
 }

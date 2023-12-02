@@ -6,14 +6,15 @@ import com.ger_professores.sistema.repositories.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
 @Service
 public class UsuarioService {
 
-  private final UsuarioRepository usuarioRepository;
+	@Autowired
+  UsuarioRepository usuarioRepository;
 
   public List<Usuario> findAll() {
     return usuarioRepository.findAll();

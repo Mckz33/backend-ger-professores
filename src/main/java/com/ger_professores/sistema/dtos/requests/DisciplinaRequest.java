@@ -1,30 +1,20 @@
 package com.ger_professores.sistema.dtos.requests;
 
-
+import com.ger_professores.sistema.enums.Trimestre;
+import com.ger_professores.sistema.models.Usuario;
 import java.util.List;
-
-import com.ger_professores.sistema.dtos.responses.CursoResponse;
-import com.ger_professores.sistema.dtos.responses.UsuarioResponse;
-import io.micrometer.common.lang.Nullable;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class DisciplinaRequest {
 
-    @NotBlank(message = "O nome da disciplina não pode estar em branco")
-    private String disciplina_nome;
+  private Long disciplinaId;
 
-    @NotNull(message = "A carga horária da disciplina não pode ser nula")
-    private Integer disciplina_carga;
+  private String disciplinaNome;
 
-    @Valid
-    @Nullable
-    private List<UsuarioResponse> professores;
+  private Integer disciplinaCarga;
 
-    @Valid
-    @Nullable
-    private CursoResponse curso;
+  private Trimestre trimestre;
+
+  private List<Usuario> usuario;
 }
