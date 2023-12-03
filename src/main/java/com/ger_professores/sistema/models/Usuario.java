@@ -51,8 +51,8 @@ public class Usuario implements Serializable {
   private Tipo tipoUsuario;
 
   @Column(name = "cursos_escolhidos")
-  private List<String> curEscolhidos;
+  private String curEscolhidos;
 
   @Column(name = "disciplinas_escolhidas")
-  private List<String> discEscolhidas;
+  private List<String> discEscolhidos;
 }

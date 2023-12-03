@@ -22,7 +22,7 @@ public class UsuarioRequest {
 
   private Tipo tipoUsuario;
 
-  private List<String> curEscolhidos;
+  private String curEscolhidos;
 
-  private List<String> discEscolhidas;
+  private List<String> discEscolhidos;
 }

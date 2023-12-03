@@ -2,6 +2,8 @@ package com.ger_professores.sistema.dtos.responses;
 
 import com.ger_professores.sistema.enums.Contratacao;
 import com.ger_professores.sistema.enums.Tipo;
+import com.ger_professores.sistema.models.Curso;
+import com.ger_professores.sistema.models.Disciplina;
 import java.util.List;
 import lombok.Data;
 
@@ -22,7 +24,7 @@ public class UsuarioResponse {
 
   private Tipo tipoUsuario;
 
-  private List<String> curEscolhidos;
+  private String curEscolhidos;
 
-  private List<String> discEscolhidas;
+  private List<String> discEscolhidos;
 }
