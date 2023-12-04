@@ -31,8 +31,8 @@ public class UsuarioController {
 
   @GetMapping
   public ResponseEntity<List<UsuarioResponse>> findAll() {
-    List<Usuario> usuarioes = usuarioService.findAll();
-    List<UsuarioResponse> usuarioResponses = usuarioes
+    List<Usuario> usuarios = usuarioService.findAll();
+    List<UsuarioResponse> usuarioResponses = usuarios
       .stream()
       .map(a -> new ModelMapper().map(a, UsuarioResponse.class))
       .collect(Collectors.toList());

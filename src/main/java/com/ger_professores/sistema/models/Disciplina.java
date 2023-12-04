@@ -11,11 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,11 +42,11 @@ public class Disciplina implements Serializable {
   // @Column(nullable = false, unique = true)
   private Trimestre trimestre;
 
-  @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+  @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
   @JoinTable(
     name = "disciplina_usuario",
-    joinColumns = @JoinColumn(name = "disciplina_id"),
-    inverseJoinColumns = @JoinColumn(name = "usuario_id")
+    joinColumns = @JoinColumn(name = "disciplinaId"),
+    inverseJoinColumns = @JoinColumn(name = "usuarioId")
   )
-  private List<Usuario> usuarios;
+  private Usuario usuario; // REMOVER LISTA DESTE ATRIBUTO
 }
