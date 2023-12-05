@@ -30,7 +30,7 @@ public class Curso implements Serializable {
   @Column(name = "curso_id")
   private Long cursoId;
 
-  @Column(name = "curso_name")
+  @Column(name = "curso_nome")
   private String cursoNome;
 
   @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
