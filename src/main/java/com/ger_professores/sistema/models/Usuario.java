@@ -2,6 +2,7 @@ package com.ger_professores.sistema.models;
 
 import com.ger_professores.sistema.enums.Contratacao;
 import com.ger_professores.sistema.enums.Tipo;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,7 +10,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
@@ -31,28 +33,32 @@ public class Usuario implements Serializable {
   @Column(name = "usuario_id")
   private Long usuarioId;
 
-  @Column(name = "usuario_nome")
+  @Column(name = "usuario_nome", nullable = false)
   private String usuarioNome;
 
-  @Column(name = "usuario_cpf")
+  @Column(name = "usuario_cpf", nullable = false, unique = true)
   private String usuarioCpf;
 
-  @Column(name = "usuario_email")
+  @Column(name = "usuario_email", nullable = false, unique = true)
   private String usuarioEmail;
 
-  @Column(name = "professor_carga")
+  @Column(name = "professor_carga", nullable = false)
   private Integer professorCarga;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "tipo_contratacao")
+  @Column(name = "tipo_contratacao", nullable = false)
   private Contratacao tipoContratacao;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "tipo_usuario")
+  @Column(name = "tipo_usuario", nullable = false)
   private Tipo tipoUsuario;
 
   @Column(name = "cursos_escolhidos")
   private String curEscolhidos;
+
+  @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+  @JoinTable(name = "usuario_login")
+  private User user;
 
   @Column(name = "disciplinas_escolhidas")
   private List<String> discEscolhidos;

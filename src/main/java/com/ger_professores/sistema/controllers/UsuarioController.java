@@ -4,6 +4,7 @@ import com.ger_professores.sistema.dtos.requests.UsuarioRequest;
 import com.ger_professores.sistema.dtos.responses.UsuarioResponse;
 import com.ger_professores.sistema.models.Usuario;
 import com.ger_professores.sistema.services.UsuarioService;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -49,7 +50,7 @@ public class UsuarioController {
 
   @PostMapping
   public ResponseEntity<UsuarioResponse> save(
-    @RequestBody UsuarioRequest usuarioRequest
+    @RequestBody @Valid UsuarioRequest usuarioRequest
   ) {
     Usuario usuario = new ModelMapper().map(usuarioRequest, Usuario.class);
     usuario = usuarioService.save(usuario);
@@ -72,7 +73,7 @@ public class UsuarioController {
   @PutMapping("/{id}")
   public ResponseEntity<UsuarioResponse> update(
     @PathVariable Long id,
-    @RequestBody UsuarioRequest usuarioRequest
+    @RequestBody @Valid UsuarioRequest usuarioRequest
   ) {
     Optional<Usuario> profeOptional = usuarioService.findById(id);
     Usuario usuario = new ModelMapper().map(usuarioRequest, Usuario.class);

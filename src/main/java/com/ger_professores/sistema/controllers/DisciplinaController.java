@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/disciplina")
 public class DisciplinaController {
 
-	@Autowired
+  @Autowired
   DisciplinaService disciplinaService;
 
   @GetMapping
