@@ -32,10 +32,10 @@ public class Disciplina implements Serializable {
   @Column(name = "disciplina_id")
   private Long disciplinaId;
 
-  // @Column(name = "disciplina_nome", nullable = false)
+  @Column(name = "disciplina_nome", nullable = false)
   private String disciplinaNome;
 
-  // @Column(name = "disciplina_carga", nullable = false)
+  @Column(name = "disciplina_carga", nullable = false)
   private Integer disciplinaCarga;
 
   @Enumerated(EnumType.STRING)

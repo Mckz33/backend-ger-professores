@@ -34,7 +34,5 @@ public class UsuarioResponse {
 
   private String curEscolhidos;
 
-  private Usuario user;
-
   private List<String> discEscolhidos;
 }

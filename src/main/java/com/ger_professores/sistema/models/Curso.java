@@ -27,9 +27,10 @@ public class Curso implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "curso_id")
   private Long cursoId;
 
-  @Column(nullable = false)
+  @Column(name = "curso_name")
   private String cursoNome;
 
   @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
