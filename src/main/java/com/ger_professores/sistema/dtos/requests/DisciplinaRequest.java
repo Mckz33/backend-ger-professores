@@ -2,7 +2,6 @@ package com.ger_professores.sistema.dtos.requests;
 
 import com.ger_professores.sistema.enums.Trimestre;
 import com.ger_professores.sistema.models.Usuario;
-import java.util.List;
 import lombok.Data;
 
 @Data
@@ -16,5 +15,5 @@ public class DisciplinaRequest {
 
   private Trimestre trimestre;
 
-  private List<Usuario> usuario;
+  private Usuario usuario;
 }
