@@ -1,20 +1,24 @@
 package com.ger_professores.sistema.services;
 
+import com.ger_professores.sistema.models.User;
 import com.ger_professores.sistema.models.Usuario;
 import com.ger_professores.sistema.models.exceptions.ResourceNotFoundException;
+import com.ger_professores.sistema.repositories.UserRepository;
 import com.ger_professores.sistema.repositories.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService {
 
-	@Autowired
+  @Autowired
   UsuarioRepository usuarioRepository;
+
+  @Autowired
+  UserRepository userRepository;
 
   public List<Usuario> findAll() {
     return usuarioRepository.findAll();
@@ -36,5 +40,21 @@ public class UsuarioService {
   @Transactional
   public void delete(Usuario usuario) {
     usuarioRepository.delete(usuario);
+  }
+
+  @Transactional
+  public void associarUser(Long usuarioId, Long id) {
+    Usuario usuario = findById(usuarioId)
+      .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrada")
+      );
+    User user = userRepository
+      .findById(id)
+      .orElseThrow(() -> new ResourceNotFoundException("User não encontrado"));
+    // Associar o professor à disciplina
+    usuario.setUser(user);
+    save(usuario); // Salvar a disciplina atualizada
+
+    // Atualizar o professor
+    usuarioRepository.save(usuario);
   }
 }

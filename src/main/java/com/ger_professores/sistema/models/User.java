@@ -21,8 +21,4 @@ public class User {
 
   @Column(nullable = false)
   private String password;
-
-  @OneToOne(mappedBy = "user")
-  @JoinColumn(referencedColumnName = "usuarioEmail")
-  private Usuario usuario;
 }

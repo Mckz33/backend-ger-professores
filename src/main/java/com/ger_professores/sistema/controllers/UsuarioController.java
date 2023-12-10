@@ -83,4 +83,13 @@ public class UsuarioController {
       .map(usuario, UsuarioResponse.class);
     return ResponseEntity.status(HttpStatus.OK).body(usuarioResponse);
   }
+
+  @PutMapping("/{usuarioId}/login/{id}")
+  public ResponseEntity<?> associarProfessor(
+    @PathVariable Long usuarioId,
+    @PathVariable Long id
+  ) {
+    usuarioService.associarUser(usuarioId, id);
+    return ResponseEntity.status(HttpStatus.OK).body("Associado com sucesso!");
+  }
 }

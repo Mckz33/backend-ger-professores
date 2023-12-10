@@ -10,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -57,7 +58,11 @@ public class Usuario implements Serializable {
   private String curEscolhidos;
 
   @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-  @JoinTable(name = "usuario_login")
+  @JoinTable(
+    name = "usuario_login",
+    joinColumns = @JoinColumn(name = "usuario_id"),
+    inverseJoinColumns = @JoinColumn(name = "id")
+  )
   private User user;
 
   @Column(name = "disciplinas_escolhidas")
