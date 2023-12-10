@@ -2,7 +2,6 @@ package com.ger_professores.sistema.dtos.responses;
 
 import com.ger_professores.sistema.enums.Contratacao;
 import com.ger_professores.sistema.enums.Tipo;
-import com.ger_professores.sistema.models.Usuario;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;

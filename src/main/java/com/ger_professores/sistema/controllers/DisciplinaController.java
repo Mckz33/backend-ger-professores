@@ -3,7 +3,10 @@ package com.ger_professores.sistema.controllers;
 import com.ger_professores.sistema.dtos.requests.DisciplinaRequest;
 import com.ger_professores.sistema.dtos.responses.DisciplinaResponse;
 import com.ger_professores.sistema.models.Disciplina;
+import com.ger_professores.sistema.models.exceptions.CargaHorariaExcedidaException;
+import com.ger_professores.sistema.models.exceptions.ResourceNotFoundException;
 import com.ger_professores.sistema.services.DisciplinaService;
+import com.ger_professores.sistema.services.UsuarioService;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +32,9 @@ public class DisciplinaController {
 
   @Autowired
   DisciplinaService disciplinaService;
+
+  @Autowired
+  UsuarioService usuarioService;
 
   @GetMapping
   public ResponseEntity<List<DisciplinaResponse>> findAll() {
@@ -86,5 +92,25 @@ public class DisciplinaController {
     DisciplinaResponse disciplinaResponse = new ModelMapper()
       .map(disciplina, DisciplinaResponse.class);
     return ResponseEntity.status(HttpStatus.OK).body(disciplinaResponse);
+  }
+
+  @PutMapping("/{disciplinaId}/professor/{professorId}")
+  public ResponseEntity<?> associarProfessor(
+    @PathVariable Long disciplinaId,
+    @PathVariable Long professorId
+  ) {
+    try {
+      // Lógica para verificar carga horária disponível do professor
+      disciplinaService.associarProfessor(disciplinaId, professorId);
+      return ResponseEntity.ok("Professor associado com sucesso à disciplina.");
+    } catch (ResourceNotFoundException e) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    } catch (CargaHorariaExcedidaException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    } catch (Exception e) {
+      return ResponseEntity
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .body("Erro interno do servidor");
+    }
   }
 }
