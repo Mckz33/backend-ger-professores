@@ -56,24 +56,15 @@ public class DisciplinaService {
       .orElseThrow(() ->
         new ResourceNotFoundException("Professor não encontrado")
       );
-
-    // Verificar carga horária disponível do professor
-    if (professor.getProfessorCarga() >= disciplina.getDisciplinaCarga()) {
-      // Atualizar a carga horária disponível do professor
-      professor.setProfessorCarga(
-        professor.getProfessorCarga() - disciplina.getDisciplinaCarga()
-      );
-
-      // Associar o professor à disciplina
-      disciplina.setUsuario(professor);
-      save(disciplina); // Salvar a disciplina atualizada
-
-      // Atualizar o professor
-      usuarioRepository.save(professor);
-    } else {
-      throw new CargaHorariaExcedidaException(
-        "Carga horária do professor excedida"
-      );
+    if (disciplina.getUsuario() != null) {
+      int result = disciplina.getUsuario().getProfessorCarga();
+      disciplina.getUsuario().setProfessorCarga(result += 2);
     }
+    professor.setProfessorCarga(
+      disciplina.getDisciplinaCarga() - professor.getProfessorCarga()
+    );
+    disciplina.setUsuario(professor);
+    save(disciplina);
+    usuarioRepository.save(professor);
   }
 }

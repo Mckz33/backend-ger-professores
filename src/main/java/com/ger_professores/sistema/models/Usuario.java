@@ -1,6 +1,7 @@
 package com.ger_professores.sistema.models;
 
 import com.ger_professores.sistema.enums.Contratacao;
+import com.ger_professores.sistema.enums.StatusAtivo;
 import com.ger_professores.sistema.enums.Tipo;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -67,4 +68,8 @@ public class Usuario implements Serializable {
 
   @Column(name = "disciplinas_escolhidas")
   private List<String> discEscolhidos;
+
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private StatusAtivo statusAtivo;
 }

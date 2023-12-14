@@ -1,8 +1,11 @@
 package com.ger_professores.sistema.models;
 
+import com.ger_professores.sistema.enums.StatusAtivo;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,4 +43,8 @@ public class Curso implements Serializable {
     inverseJoinColumns = @JoinColumn(name = "disciplinaId")
   )
   private List<Disciplina> disciplinas;
+
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private StatusAtivo statusAtivo;
 }

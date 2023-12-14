@@ -3,6 +3,7 @@ package com.ger_professores.sistema.controllers;
 import com.ger_professores.sistema.dtos.requests.CursoRequest;
 import com.ger_professores.sistema.dtos.responses.CursoResponse;
 import com.ger_professores.sistema.models.Curso;
+import com.ger_professores.sistema.models.exceptions.ResourceNotFoundException;
 import com.ger_professores.sistema.services.CursoService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -82,5 +83,30 @@ public class CursoController {
     CursoResponse cursoResponse = new ModelMapper()
       .map(curso, CursoResponse.class);
     return ResponseEntity.status(HttpStatus.OK).body(cursoResponse);
+  }
+
+  @PostMapping("/{cursoId}/adicionarDisciplina/{disciplinaId}")
+  public ResponseEntity<CursoResponse> adicionarDisciplinaAoCurso(
+    @PathVariable Long cursoId,
+    @PathVariable Long disciplinaId
+  ) {
+    try {
+      cursoService.associarDisciplina(cursoId, disciplinaId);
+      // Recupera o curso atualizado após adicionar a disciplina
+      Curso cursoAtualizado = cursoService
+        .findById(cursoId)
+        .orElseThrow(() ->
+          new ResourceNotFoundException(
+            "Curso não encontrado após associar disciplina"
+          )
+        );
+      // Mapeia o curso atualizado para o DTO de resposta
+      CursoResponse cursoResponse = new ModelMapper()
+        .map(cursoAtualizado, CursoResponse.class);
+
+      return ResponseEntity.status(HttpStatus.OK).body(cursoResponse);
+    } catch (ResourceNotFoundException e) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
   }
 }

@@ -1,5 +1,6 @@
 package com.ger_professores.sistema.models;
 
+import com.ger_professores.sistema.enums.StatusAtivo;
 import com.ger_professores.sistema.enums.Trimestre;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -39,7 +40,7 @@ public class Disciplina implements Serializable {
   private Integer disciplinaCarga;
 
   @Enumerated(EnumType.STRING)
-  // @Column(nullable = false, unique = true)
+  @Column(nullable = false)
   private Trimestre trimestre;
 
   @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -48,5 +49,9 @@ public class Disciplina implements Serializable {
     joinColumns = @JoinColumn(name = "disciplinaId"),
     inverseJoinColumns = @JoinColumn(name = "usuarioId")
   )
-  private Usuario usuario; // REMOVER LISTA DESTE ATRIBUTO
+  private Usuario usuario;
+
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private StatusAtivo statusAtivo;
 }
