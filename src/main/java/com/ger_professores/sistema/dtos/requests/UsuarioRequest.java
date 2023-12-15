@@ -1,6 +1,7 @@
 package com.ger_professores.sistema.dtos.requests;
 
 import com.ger_professores.sistema.enums.Contratacao;
+import com.ger_professores.sistema.enums.StatusAtivo;
 import com.ger_professores.sistema.enums.Tipo;
 import com.ger_professores.sistema.models.User;
 import jakarta.validation.constraints.Email;
@@ -39,4 +40,6 @@ public class UsuarioRequest {
   private List<String> discEscolhidos;
 
   private User user;
+
+  private StatusAtivo statusAtivo;
 }

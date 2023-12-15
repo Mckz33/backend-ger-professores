@@ -1,5 +1,6 @@
 package com.ger_professores.sistema.dtos.responses;
 
+import com.ger_professores.sistema.enums.StatusAtivo;
 import com.ger_professores.sistema.models.Disciplina;
 import java.util.List;
 import lombok.Data;
@@ -12,4 +13,6 @@ public class CursoResponse {
   private String cursoNome;
 
   private List<Disciplina> disciplinas;
+
+  private StatusAtivo statusAtivo;
 }
