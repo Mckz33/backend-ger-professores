@@ -2,7 +2,6 @@ package com.ger_professores.sistema.services;
 
 import com.ger_professores.sistema.models.Disciplina;
 import com.ger_professores.sistema.models.Usuario;
-import com.ger_professores.sistema.models.exceptions.CargaHorariaExcedidaException;
 import com.ger_professores.sistema.models.exceptions.ResourceNotFoundException;
 import com.ger_professores.sistema.repositories.DisciplinaRepository;
 import com.ger_professores.sistema.repositories.UsuarioRepository;
