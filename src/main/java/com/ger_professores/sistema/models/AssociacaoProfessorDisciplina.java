@@ -30,7 +30,7 @@ public class AssociacaoProfessorDisciplina {
   private Disciplina disciplina;
 
   @ManyToOne
-  @JoinColumn(name = "professor_id")
+  @JoinColumn(name = "usuario_id")
   private Usuario usuario;
 
   @Enumerated(EnumType.STRING)
