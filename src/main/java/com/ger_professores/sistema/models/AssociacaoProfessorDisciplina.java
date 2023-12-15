@@ -29,6 +29,10 @@ public class AssociacaoProfessorDisciplina {
   @JoinColumn(name = "disciplina_id")
   private Disciplina disciplina;
 
+  @ManyToOne
+  @JoinColumn(name = "professor_id")
+  private Usuario usuario;
+
   @Enumerated(EnumType.STRING)
   @Column(name = "status_aprovacao")
   private StatusAprovacao statusAprovacao;

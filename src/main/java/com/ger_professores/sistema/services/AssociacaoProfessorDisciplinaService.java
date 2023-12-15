@@ -4,6 +4,7 @@ import com.ger_professores.sistema.enums.StatusAprovacao;
 import com.ger_professores.sistema.models.AssociacaoProfessorDisciplina;
 import com.ger_professores.sistema.models.exceptions.ResourceNotFoundException;
 import com.ger_professores.sistema.repositories.AssociacaoProfessorDisciplinaRepository;
+import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -18,6 +19,13 @@ public class AssociacaoProfessorDisciplinaService {
 
   public List<AssociacaoProfessorDisciplina> obterAssociaçõesPendentes() {
     return associacaoRepository.findByStatusAprovacao(StatusAprovacao.PENDENTE);
+  }
+
+  @Transactional
+  public AssociacaoProfessorDisciplina save(
+    AssociacaoProfessorDisciplina associacaoProfessorDisciplina
+  ) {
+    return associacaoRepository.save(associacaoProfessorDisciplina);
   }
 
   public void aprovarAssociação(Long associaçãoId) {
