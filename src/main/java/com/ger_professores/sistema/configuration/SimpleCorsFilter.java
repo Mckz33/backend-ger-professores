@@ -16,23 +16,22 @@ public class SimpleCorsFilter implements Filter {
   @Value("${app.client.url}")
   private String clientAppUrl = "";
 
-  public SimpleCorsFilter() {}
+  public SimpleCorsFilter() {
+  }
 
   @Override
   public void doFilter(
-    ServletRequest req,
-    ServletResponse res,
-    FilterChain chain
-  ) throws IOException, ServletException {
+      ServletRequest req,
+      ServletResponse res,
+      FilterChain chain) throws IOException, ServletException {
     HttpServletResponse response = (HttpServletResponse) res;
     HttpServletRequest request = (HttpServletRequest) req;
 
     String originHeader = request.getHeader("origin");
     response.setHeader("Access-Control-Allow-Origin", originHeader);
     response.setHeader(
-      "Access-Control-Allow-Methods",
-      "POST, GET, PUT, OPTIONS, DELETE"
-    );
+        "Access-Control-Allow-Methods",
+        "POST, GET, PUT, OPTIONS, DELETE");
     response.setHeader("Access-Control-Max-Age", "3600");
     response.setHeader("Access-Control-Allow-Headers", "*");
 
@@ -44,8 +43,10 @@ public class SimpleCorsFilter implements Filter {
   }
 
   @Override
-  public void init(FilterConfig filterConfig) {}
+  public void init(FilterConfig filterConfig) {
+  }
 
   @Override
-  public void destroy() {}
+  public void destroy() {
+  }
 }

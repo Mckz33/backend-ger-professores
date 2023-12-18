@@ -45,11 +45,10 @@ public class UsuarioService {
   @Transactional
   public void associarUser(Long usuarioId, Long id) {
     Usuario usuario = findById(usuarioId)
-      .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrada")
-      );
+        .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrada"));
     User user = userRepository
-      .findById(id)
-      .orElseThrow(() -> new ResourceNotFoundException("User não encontrado"));
+        .findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("User não encontrado"));
     // Associar o professor à disciplina
     usuario.setUser(user);
     save(usuario); // Salvar a disciplina atualizada

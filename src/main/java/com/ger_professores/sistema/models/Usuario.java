@@ -59,11 +59,7 @@ public class Usuario implements Serializable {
   private String curEscolhidos;
 
   @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-  @JoinTable(
-    name = "usuario_login",
-    joinColumns = @JoinColumn(name = "usuario_id"),
-    inverseJoinColumns = @JoinColumn(name = "id")
-  )
+  @JoinTable(name = "usuario_login", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "id"))
   private User user;
 
   @Column(name = "disciplinas_escolhidas")

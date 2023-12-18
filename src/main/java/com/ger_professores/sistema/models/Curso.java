@@ -37,11 +37,7 @@ public class Curso implements Serializable {
   private String cursoNome;
 
   @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-  @JoinTable(
-    name = "curso_disciplina",
-    joinColumns = @JoinColumn(name = "cursoId"),
-    inverseJoinColumns = @JoinColumn(name = "disciplinaId")
-  )
+  @JoinTable(name = "curso_disciplina", joinColumns = @JoinColumn(name = "cursoId"), inverseJoinColumns = @JoinColumn(name = "disciplinaId"))
   private List<Disciplina> disciplinas;
 
   @Enumerated(EnumType.STRING)

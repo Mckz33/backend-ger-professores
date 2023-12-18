@@ -24,15 +24,13 @@ public class AssociacaoProfessorDisciplinaService {
 
   @Transactional
   public AssociacaoProfessorDisciplina save(
-    AssociacaoProfessorDisciplina associacao
-  ) {
+      AssociacaoProfessorDisciplina associacao) {
     return associacaoRepository.save(associacao);
   }
 
   public Optional<AssociacaoProfessorDisciplina> findById(Long associacaoId) {
     Optional<AssociacaoProfessorDisciplina> optionalAssociacao = associacaoRepository.findById(
-      associacaoId
-    );
+        associacaoId);
     if (optionalAssociacao.isEmpty()) {
       throw new ResourceNotFoundException("Associação não encontrado");
     }
@@ -41,10 +39,8 @@ public class AssociacaoProfessorDisciplinaService {
 
   public void aprovarAssociação(Long associaçãoId) {
     AssociacaoProfessorDisciplina associação = associacaoRepository
-      .findById(associaçãoId)
-      .orElseThrow(() ->
-        new ResourceNotFoundException("Associação não encontrada")
-      );
+        .findById(associaçãoId)
+        .orElseThrow(() -> new ResourceNotFoundException("Associação não encontrada"));
 
     // Verifique se a associação está pendente antes de aprovar.
     if (associação.getStatusAprovacao() == StatusAprovacao.PENDENTE) {
@@ -53,25 +49,21 @@ public class AssociacaoProfessorDisciplinaService {
       associacaoRepository.save(associação);
     } else {
       throw new IllegalStateException(
-        "Esta associação não está pendente de aprovação."
-      );
+          "Esta associação não está pendente de aprovação.");
     }
   }
 
   public void reprovarAssociação(Long associaçãoId) {
     AssociacaoProfessorDisciplina associação = associacaoRepository
-      .findById(associaçãoId)
-      .orElseThrow(() ->
-        new ResourceNotFoundException("Associação não encontrada")
-      );
+        .findById(associaçãoId)
+        .orElseThrow(() -> new ResourceNotFoundException("Associação não encontrada"));
     // Verifique se a associação está pendente antes de aprovar.
     if (associação.getStatusAprovacao() == StatusAprovacao.PENDENTE) {
       associação.setStatusAprovacao(StatusAprovacao.RECUSADO);
       associacaoRepository.save(associação);
     } else {
       throw new IllegalStateException(
-        "Esta associação não está pendente de aprovação."
-      );
+          "Esta associação não está pendente de aprovação.");
     }
   }
 }

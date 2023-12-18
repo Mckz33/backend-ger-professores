@@ -52,13 +52,10 @@ public class CursoService {
   @Transactional
   public void associarDisciplina(Long cursoId, Long disciplinaId) {
     Curso curso = findById(cursoId)
-      .orElseThrow(() -> new ResourceNotFoundException("Curso Não Encontrado.")
-      );
+        .orElseThrow(() -> new ResourceNotFoundException("Curso Não Encontrado."));
     Disciplina disciplina = disciplinaRepository
-      .findById(disciplinaId)
-      .orElseThrow(() ->
-        new ResourceNotFoundException("Disciplina Não Encontrado.")
-      );
+        .findById(disciplinaId)
+        .orElseThrow(() -> new ResourceNotFoundException("Disciplina Não Encontrado."));
 
     List<Disciplina> disciplinas = curso.getDisciplinas();
     if (disciplinas == null) {

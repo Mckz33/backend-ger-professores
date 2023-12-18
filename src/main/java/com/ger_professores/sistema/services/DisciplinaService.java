@@ -47,21 +47,16 @@ public class DisciplinaService {
   @Transactional
   public void associarProfessor(Long disciplinaId, Long professorId) {
     Disciplina disciplina = findById(disciplinaId)
-      .orElseThrow(() ->
-        new ResourceNotFoundException("Disciplina não encontrada")
-      );
+        .orElseThrow(() -> new ResourceNotFoundException("Disciplina não encontrada"));
     Usuario professor = usuarioRepository
-      .findById(professorId)
-      .orElseThrow(() ->
-        new ResourceNotFoundException("Professor não encontrado")
-      );
+        .findById(professorId)
+        .orElseThrow(() -> new ResourceNotFoundException("Professor não encontrado"));
     if (disciplina.getUsuario() != null) {
       int result = disciplina.getUsuario().getProfessorCarga();
       disciplina.getUsuario().setProfessorCarga(result += 2);
     }
     professor.setProfessorCarga(
-      disciplina.getDisciplinaCarga() - professor.getProfessorCarga()
-    );
+        disciplina.getDisciplinaCarga() - professor.getProfessorCarga());
     disciplina.setUsuario(professor);
     save(disciplina);
     usuarioRepository.save(professor);

@@ -31,30 +31,25 @@ public class AuthenticationController {
 
   @PostMapping("/authenticate")
   public AuthenticationResponse createAuthenticationToken(
-    @RequestBody AuthenticationDTO authenticationDTO,
-    HttpServletResponse response
-  )
-    throws BadCredentialsException, DisabledException, UsernameNotFoundException, IOException {
+      @RequestBody AuthenticationDTO authenticationDTO,
+      HttpServletResponse response)
+      throws BadCredentialsException, DisabledException, UsernameNotFoundException, IOException {
     try {
       authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(
-          authenticationDTO.getEmail(),
-          authenticationDTO.getPassword()
-        )
-      );
+          new UsernamePasswordAuthenticationToken(
+              authenticationDTO.getEmail(),
+              authenticationDTO.getPassword()));
     } catch (BadCredentialsException e) {
       throw new BadCredentialsException("Incorrect username or password!");
     } catch (DisabledException disabledException) {
       response.sendError(
-        HttpServletResponse.SC_NOT_FOUND,
-        "User is not activated"
-      );
+          HttpServletResponse.SC_NOT_FOUND,
+          "User is not activated");
       return null;
     }
 
     final UserDetails userDetails = userDetailsService.loadUserByUsername(
-      authenticationDTO.getEmail()
-    );
+        authenticationDTO.getEmail());
 
     final String jwt = jwtUtil.generateToken(userDetails.getUsername());
 

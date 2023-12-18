@@ -40,9 +40,9 @@ public class DisciplinaController {
   public ResponseEntity<List<DisciplinaResponse>> findAll() {
     List<Disciplina> disciplinas = disciplinaService.findAll();
     List<DisciplinaResponse> disciplinaResponses = disciplinas
-      .stream()
-      .map(a -> new ModelMapper().map(a, DisciplinaResponse.class))
-      .collect(Collectors.toList());
+        .stream()
+        .map(a -> new ModelMapper().map(a, DisciplinaResponse.class))
+        .collect(Collectors.toList());
     return ResponseEntity.status(HttpStatus.OK).body(disciplinaResponses);
   }
 
@@ -50,19 +50,18 @@ public class DisciplinaController {
   public ResponseEntity<DisciplinaResponse> findById(@PathVariable Long id) {
     Optional<Disciplina> disciplinaOptional = disciplinaService.findById(id);
     DisciplinaResponse disciplinaResponse = new ModelMapper()
-      .map(disciplinaOptional.orElseThrow(), DisciplinaResponse.class);
+        .map(disciplinaOptional.orElseThrow(), DisciplinaResponse.class);
     return ResponseEntity.status(HttpStatus.OK).body(disciplinaResponse);
   }
 
   @PostMapping
   public ResponseEntity<DisciplinaResponse> save(
-    @RequestBody @Valid DisciplinaRequest disciplinaRequest
-  ) {
+      @RequestBody @Valid DisciplinaRequest disciplinaRequest) {
     Disciplina disciplina = new ModelMapper()
-      .map(disciplinaRequest, Disciplina.class);
+        .map(disciplinaRequest, Disciplina.class);
     disciplina = disciplinaService.save(disciplina);
     DisciplinaResponse disciplinaResponse = new ModelMapper()
-      .map(disciplina, DisciplinaResponse.class);
+        .map(disciplina, DisciplinaResponse.class);
     return ResponseEntity.status(HttpStatus.CREATED).body(disciplinaResponse);
   }
 
@@ -70,35 +69,32 @@ public class DisciplinaController {
   public ResponseEntity<Object> delete(@PathVariable Long id) {
     Optional<Disciplina> disciplinaOptional = disciplinaService.findById(id);
     Disciplina disciplina = new ModelMapper()
-      .map(disciplinaOptional.orElseThrow(), Disciplina.class);
+        .map(disciplinaOptional.orElseThrow(), Disciplina.class);
     disciplinaService.delete(disciplina);
     return ResponseEntity
-      .status(HttpStatus.OK)
-      .body("Disciplina deletada com sucesso.");
+        .status(HttpStatus.OK)
+        .body("Disciplina deletada com sucesso.");
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<DisciplinaResponse> update(
-    @PathVariable @Valid Long id,
-    @RequestBody DisciplinaRequest disciplinaRequest
-  ) {
+      @PathVariable @Valid Long id,
+      @RequestBody DisciplinaRequest disciplinaRequest) {
     Optional<Disciplina> disciplinaOptional = disciplinaService.findById(id);
     Disciplina disciplina = new ModelMapper()
-      .map(disciplinaRequest, Disciplina.class);
+        .map(disciplinaRequest, Disciplina.class);
     disciplina.setDisciplinaId(
-      disciplinaOptional.orElseThrow().getDisciplinaId()
-    );
+        disciplinaOptional.orElseThrow().getDisciplinaId());
     disciplinaService.save(disciplina);
     DisciplinaResponse disciplinaResponse = new ModelMapper()
-      .map(disciplina, DisciplinaResponse.class);
+        .map(disciplina, DisciplinaResponse.class);
     return ResponseEntity.status(HttpStatus.OK).body(disciplinaResponse);
   }
 
   @PutMapping("/{disciplinaId}/professor/{professorId}")
   public ResponseEntity<?> associarProfessor(
-    @PathVariable Long disciplinaId,
-    @PathVariable Long professorId
-  ) {
+      @PathVariable Long disciplinaId,
+      @PathVariable Long professorId) {
     try {
       // Lógica para verificar carga horária disponível do professor
       disciplinaService.associarProfessor(disciplinaId, professorId);
@@ -109,8 +105,8 @@ public class DisciplinaController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     } catch (Exception e) {
       return ResponseEntity
-        .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .body("Erro interno do servidor");
+          .status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body("Erro interno do servidor");
     }
   }
 }

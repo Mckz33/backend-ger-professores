@@ -16,8 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtUtil {
 
-  public static final String SECRET =
-    "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
+  public static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
 
   public String extractUsername(String token) {
     return extractClaim(token, Claims::getSubject);
@@ -34,11 +33,11 @@ public class JwtUtil {
 
   private Claims extractAllClaims(String token) {
     return Jwts
-      .parserBuilder()
-      .setSigningKey(getSignKey())
-      .build()
-      .parseClaimsJws(token)
-      .getBody();
+        .parserBuilder()
+        .setSigningKey(getSignKey())
+        .build()
+        .parseClaimsJws(token)
+        .getBody();
   }
 
   private Boolean isTokenExpired(String token) {
@@ -47,9 +46,7 @@ public class JwtUtil {
 
   public Boolean validateToken(String token, UserDetails userDetails) {
     final String username = extractUsername(token);
-    return (
-      username.equals(userDetails.getUsername()) && !isTokenExpired(token)
-    );
+    return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
   }
 
   public String generateToken(String userName) {
@@ -59,13 +56,13 @@ public class JwtUtil {
 
   private String createToken(Map<String, Object> claims, String userName) {
     return Jwts
-      .builder()
-      .setClaims(claims)
-      .setSubject(userName)
-      .setIssuedAt(new Date(System.currentTimeMillis()))
-      .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
-      .signWith(getSignKey(), SignatureAlgorithm.HS256)
-      .compact();
+        .builder()
+        .setClaims(claims)
+        .setSubject(userName)
+        .setIssuedAt(new Date(System.currentTimeMillis()))
+        .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
+        .signWith(getSignKey(), SignatureAlgorithm.HS256)
+        .compact();
   }
 
   private Key getSignKey() {

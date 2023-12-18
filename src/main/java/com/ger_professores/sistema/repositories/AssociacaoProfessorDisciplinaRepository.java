@@ -6,8 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AssociacaoProfessorDisciplinaRepository
-  extends JpaRepository<AssociacaoProfessorDisciplina, Long> {
+    extends JpaRepository<AssociacaoProfessorDisciplina, Long> {
   List<AssociacaoProfessorDisciplina> findByStatusAprovacao(
-    StatusAprovacao statusAprovacao
-  );
+      StatusAprovacao statusAprovacao);
 }

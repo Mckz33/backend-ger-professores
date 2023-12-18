@@ -44,11 +44,7 @@ public class Disciplina implements Serializable {
   private Trimestre trimestre;
 
   @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-  @JoinTable(
-    name = "disciplina_usuario",
-    joinColumns = @JoinColumn(name = "disciplinaId"),
-    inverseJoinColumns = @JoinColumn(name = "usuarioId")
-  )
+  @JoinTable(name = "disciplina_usuario", joinColumns = @JoinColumn(name = "disciplinaId"), inverseJoinColumns = @JoinColumn(name = "usuarioId"))
   private Usuario usuario;
 
   @Enumerated(EnumType.STRING)

@@ -34,9 +34,9 @@ public class UsuarioController {
   public ResponseEntity<List<UsuarioResponse>> findAll() {
     List<Usuario> usuarios = usuarioService.findAll();
     List<UsuarioResponse> usuarioResponses = usuarios
-      .stream()
-      .map(a -> new ModelMapper().map(a, UsuarioResponse.class))
-      .collect(Collectors.toList());
+        .stream()
+        .map(a -> new ModelMapper().map(a, UsuarioResponse.class))
+        .collect(Collectors.toList());
     return ResponseEntity.status(HttpStatus.OK).body(usuarioResponses);
   }
 
@@ -44,18 +44,17 @@ public class UsuarioController {
   public ResponseEntity<UsuarioResponse> findById(@PathVariable Long id) {
     Optional<Usuario> usuarioOptional = usuarioService.findById(id);
     UsuarioResponse usuarioResponse = new ModelMapper()
-      .map(usuarioOptional.orElseThrow(), UsuarioResponse.class);
+        .map(usuarioOptional.orElseThrow(), UsuarioResponse.class);
     return ResponseEntity.status(HttpStatus.OK).body(usuarioResponse);
   }
 
   @PostMapping
   public ResponseEntity<UsuarioResponse> save(
-    @RequestBody @Valid UsuarioRequest usuarioRequest
-  ) {
+      @RequestBody @Valid UsuarioRequest usuarioRequest) {
     Usuario usuario = new ModelMapper().map(usuarioRequest, Usuario.class);
     usuario = usuarioService.save(usuario);
     UsuarioResponse usuarioResponse = new ModelMapper()
-      .map(usuario, UsuarioResponse.class);
+        .map(usuario, UsuarioResponse.class);
     return ResponseEntity.status(HttpStatus.CREATED).body(usuarioResponse);
   }
 
@@ -63,32 +62,29 @@ public class UsuarioController {
   public ResponseEntity<Object> delete(@PathVariable Long id) {
     Optional<Usuario> usuarioOptional = usuarioService.findById(id);
     Usuario usuario = new ModelMapper()
-      .map(usuarioOptional.orElseThrow(), Usuario.class);
+        .map(usuarioOptional.orElseThrow(), Usuario.class);
     usuarioService.delete(usuario);
     return ResponseEntity
-      .status(HttpStatus.OK)
-      .body("usuario deletado com sucesso.");
+        .status(HttpStatus.OK)
+        .body("usuario deletado com sucesso.");
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<UsuarioResponse> update(
-    @PathVariable Long id,
-    @RequestBody @Valid UsuarioRequest usuarioRequest
-  ) {
+  public ResponseEntity<UsuarioResponse> update(@PathVariable Long id,
+      @RequestBody @Valid UsuarioRequest usuarioRequest) {
     Optional<Usuario> profeOptional = usuarioService.findById(id);
     Usuario usuario = new ModelMapper().map(usuarioRequest, Usuario.class);
     usuario.setUsuarioId(profeOptional.orElseThrow().getUsuarioId());
     usuarioService.save(usuario);
     UsuarioResponse usuarioResponse = new ModelMapper()
-      .map(usuario, UsuarioResponse.class);
+        .map(usuario, UsuarioResponse.class);
     return ResponseEntity.status(HttpStatus.OK).body(usuarioResponse);
   }
 
   @PutMapping("/{usuarioId}/login/{id}")
   public ResponseEntity<?> associarProfessor(
-    @PathVariable Long usuarioId,
-    @PathVariable Long id
-  ) {
+      @PathVariable Long usuarioId,
+      @PathVariable Long id) {
     usuarioService.associarUser(usuarioId, id);
     return ResponseEntity.status(HttpStatus.OK).body("Associado com sucesso!");
   }

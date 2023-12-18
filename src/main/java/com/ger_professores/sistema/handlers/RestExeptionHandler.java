@@ -12,13 +12,11 @@ public class RestExeptionHandler {
 
   @ExceptionHandler(ResourceNotFoundException.class)
   public ResponseEntity<?> handleResourceNotFoundException(
-    ResourceNotFoundException ex
-  ) {
+      ResourceNotFoundException ex) {
     ErrorMessage errorMessage = new ErrorMessage(
-      "Not Found",
-      HttpStatus.NOT_FOUND.value(),
-      ex.getMessage()
-    );
+        "Not Found",
+        HttpStatus.NOT_FOUND.value(),
+        ex.getMessage());
     return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
   }
 }

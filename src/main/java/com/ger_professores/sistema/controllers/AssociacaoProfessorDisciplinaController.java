@@ -31,34 +31,29 @@ public class AssociacaoProfessorDisciplinaController {
 
   @PostMapping("/aprovar/{associaçãoId}")
   public ResponseEntity<String> aprovarAssociação(
-    @PathVariable Long associaçãoId
-  ) {
+      @PathVariable Long associaçãoId) {
     associacaoService.aprovarAssociação(associaçãoId);
     return ResponseEntity.status(HttpStatus.OK).body("Aprovado Com Sucesso!");
   }
 
   @PostMapping
   public ResponseEntity<AssociacaoProfessorDisciplina> save(
-    @RequestBody AssociacaoProfessorDisciplina associacaoProfessorDisciplina
-  ) {
+      @RequestBody AssociacaoProfessorDisciplina associacaoProfessorDisciplina) {
     return ResponseEntity
-      .status(HttpStatus.CREATED)
-      .body(associacaoService.save(associacaoProfessorDisciplina));
+        .status(HttpStatus.CREATED)
+        .body(associacaoService.save(associacaoProfessorDisciplina));
   }
 
   @PutMapping("reprovar/{id}")
   public ResponseEntity<AssociacaoProfessorDisciplina> reprovarAssociação(
-    @PathVariable Long associacaoId,
-    @RequestBody AssociacaoProfessorDisciplina associacaoProfessorDisciplina
-  ) {
+      @PathVariable Long associacaoId,
+      @RequestBody AssociacaoProfessorDisciplina associacaoProfessorDisciplina) {
     Optional<AssociacaoProfessorDisciplina> optionalAssociacao = associacaoService.findById(
-      associacaoId
-    );
+        associacaoId);
     associacaoProfessorDisciplina.setAssociacaoId(
-      optionalAssociacao.orElseThrow().getAssociacaoId()
-    );
+        optionalAssociacao.orElseThrow().getAssociacaoId());
     return ResponseEntity
-      .status(HttpStatus.OK)
-      .body(associacaoService.save(associacaoProfessorDisciplina));
+        .status(HttpStatus.OK)
+        .body(associacaoService.save(associacaoProfessorDisciplina));
   }
 }
