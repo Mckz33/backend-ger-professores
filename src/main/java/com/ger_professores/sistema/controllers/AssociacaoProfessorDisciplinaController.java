@@ -29,9 +29,9 @@ public class AssociacaoProfessorDisciplinaController {
     return associacaoService.obterAssociaçõesPendentes();
   }
 
-  @PostMapping("/aprovar/{associaçãoId}")
+  @PutMapping("/aprovar/{associaçãoId}")
   public ResponseEntity<String> aprovarAssociação(
-      @PathVariable Long associaçãoId) {
+    @PathVariable Long associaçãoId) {
     associacaoService.aprovarAssociação(associaçãoId);
     return ResponseEntity.status(HttpStatus.OK).body("Aprovado Com Sucesso!");
   }
@@ -44,16 +44,10 @@ public class AssociacaoProfessorDisciplinaController {
         .body(associacaoService.save(associacaoProfessorDisciplina));
   }
 
-  @PutMapping("reprovar/{id}")
-  public ResponseEntity<AssociacaoProfessorDisciplina> reprovarAssociação(
-      @PathVariable Long associacaoId,
-      @RequestBody AssociacaoProfessorDisciplina associacaoProfessorDisciplina) {
-    Optional<AssociacaoProfessorDisciplina> optionalAssociacao = associacaoService.findById(
-        associacaoId);
-    associacaoProfessorDisciplina.setAssociacaoId(
-        optionalAssociacao.orElseThrow().getAssociacaoId());
-    return ResponseEntity
-        .status(HttpStatus.OK)
-        .body(associacaoService.save(associacaoProfessorDisciplina));
+  @PutMapping("reprovar/{associaçãoId}")
+  public ResponseEntity<String> reprovarAssociação(
+    @PathVariable Long associaçãoId) {
+    associacaoService.reprovarAssociação(associaçãoId);
+    return ResponseEntity.status(HttpStatus.OK).body("Aprovado Com Sucesso!");
   }
 }
