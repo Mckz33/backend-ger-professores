@@ -6,6 +6,7 @@ import com.ger_professores.sistema.models.Usuario;
 import com.ger_professores.sistema.services.UsuarioService;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
@@ -48,6 +49,14 @@ public class UsuarioController {
     return ResponseEntity.status(HttpStatus.OK).body(usuarioResponse);
   }
 
+  @GetMapping("/por-email/{email}")
+  public ResponseEntity<?> obterUsuarioPorEmail(@PathVariable String email) {
+    Optional<?> optionalUsuario = usuarioService.findFirstByEmail(email);
+    return optionalUsuario
+        .map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
+        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+
   @PostMapping
   public ResponseEntity<UsuarioResponse> save(
       @RequestBody @Valid UsuarioRequest usuarioRequest) {
@@ -86,6 +95,7 @@ public class UsuarioController {
       @PathVariable Long usuarioId,
       @PathVariable Long id) {
     usuarioService.associarUser(usuarioId, id);
-    return ResponseEntity.status(HttpStatus.OK).body("Associado com sucesso!");
+    return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Associado com sucesso!"));
   }
+
 }

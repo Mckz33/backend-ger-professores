@@ -35,24 +35,24 @@ public class Usuario implements Serializable {
   @Column(name = "usuario_id")
   private Long usuarioId;
 
-  @Column(name = "usuario_nome", nullable = false)
+  @Column(name = "usuario_nome")
   private String usuarioNome;
 
-  @Column(name = "usuario_cpf", nullable = false, unique = true)
+  @Column(name = "usuario_cpf", unique = true)
   private String usuarioCpf;
 
   @Column(name = "usuario_email", nullable = false, unique = true)
   private String usuarioEmail;
 
-  @Column(name = "professor_carga", nullable = false)
+  @Column(name = "professor_carga")
   private Integer professorCarga;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "tipo_contratacao", nullable = false)
+  @Column(name = "tipo_contratacao")
   private Contratacao tipoContratacao;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "tipo_usuario", nullable = false)
+  @Column(name = "tipo_usuario")
   private Tipo tipoUsuario;
 
   @Column(name = "cursos_escolhidos")

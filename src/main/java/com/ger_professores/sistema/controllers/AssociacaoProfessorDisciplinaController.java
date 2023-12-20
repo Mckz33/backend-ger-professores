@@ -3,7 +3,6 @@ package com.ger_professores.sistema.controllers;
 import com.ger_professores.sistema.models.AssociacaoProfessorDisciplina;
 import com.ger_professores.sistema.services.AssociacaoProfessorDisciplinaService;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +30,7 @@ public class AssociacaoProfessorDisciplinaController {
 
   @PutMapping("/aprovar/{associaçãoId}")
   public ResponseEntity<String> aprovarAssociação(
-    @PathVariable Long associaçãoId) {
+      @PathVariable Long associaçãoId) {
     associacaoService.aprovarAssociação(associaçãoId);
     return ResponseEntity.status(HttpStatus.OK).body("Aprovado Com Sucesso!");
   }
@@ -46,7 +45,7 @@ public class AssociacaoProfessorDisciplinaController {
 
   @PutMapping("reprovar/{associaçãoId}")
   public ResponseEntity<String> reprovarAssociação(
-    @PathVariable Long associaçãoId) {
+      @PathVariable Long associaçãoId) {
     associacaoService.reprovarAssociação(associaçãoId);
     return ResponseEntity.status(HttpStatus.OK).body("Aprovado Com Sucesso!");
   }

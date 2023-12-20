@@ -4,6 +4,7 @@ import com.ger_professores.sistema.enums.Contratacao;
 import com.ger_professores.sistema.enums.StatusAtivo;
 import com.ger_professores.sistema.enums.Tipo;
 import com.ger_professores.sistema.models.User;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,11 +17,9 @@ public class UsuarioRequest {
 
   private Long usuarioId;
 
-  @NotBlank
   private String usuarioNome;
 
   @CPF
-  @NotBlank
   private String usuarioCpf;
 
   @Email
@@ -29,10 +28,8 @@ public class UsuarioRequest {
 
   private Integer professorCarga;
 
-  @NotNull
   private Contratacao tipoContratacao;
 
-  @NotNull
   private Tipo tipoUsuario;
 
   private String curEscolhidos;
@@ -41,5 +38,6 @@ public class UsuarioRequest {
 
   private User user;
 
+  @NotNull
   private StatusAtivo statusAtivo;
 }
