@@ -1,5 +1,6 @@
 package com.ger_professores.sistema.services;
 
+import com.ger_professores.sistema.enums.StatusAtivo;
 import com.ger_professores.sistema.models.Disciplina;
 import com.ger_professores.sistema.models.Usuario;
 import com.ger_professores.sistema.models.exceptions.ResourceNotFoundException;
@@ -24,6 +25,10 @@ public class DisciplinaService {
 
   public List<Disciplina> findAll() {
     return disciplinaRepository.findAll();
+  }
+
+  public List<Disciplina> buscarObjetosAtivos() {
+    return disciplinaRepository.findByStatusAtivo(StatusAtivo.ATIVADO);
   }
 
   public Optional<Disciplina> findById(Long id) {

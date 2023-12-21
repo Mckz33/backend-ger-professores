@@ -1,5 +1,6 @@
 package com.ger_professores.sistema.services;
 
+import com.ger_professores.sistema.enums.StatusAtivo;
 import com.ger_professores.sistema.models.Curso;
 import com.ger_professores.sistema.models.Disciplina;
 import com.ger_professores.sistema.models.exceptions.ResourceNotFoundException;
@@ -42,6 +43,10 @@ public class CursoService {
   @Transactional
   public Curso save(Curso curso) {
     return cursoRepository.save(curso);
+  }
+
+  public List<Curso> buscarObjetosAtivos() {
+    return cursoRepository.findByStatusAtivo(StatusAtivo.ATIVADO);
   }
 
   @Transactional

@@ -41,6 +41,16 @@ public class UsuarioController {
     return ResponseEntity.status(HttpStatus.OK).body(usuarioResponses);
   }
 
+  @GetMapping("/usuarios-ativos")
+  public ResponseEntity<List<UsuarioResponse>> listarObjetosAtivos() {
+    List<Usuario> usuarios = usuarioService.buscarObjetosAtivos();
+    List<UsuarioResponse> usuarioResponses = usuarios
+        .stream()
+        .map(a -> new ModelMapper().map(a, UsuarioResponse.class))
+        .collect(Collectors.toList());
+    return ResponseEntity.status(HttpStatus.OK).body(usuarioResponses);
+  }
+
   @GetMapping("/{id}")
   public ResponseEntity<UsuarioResponse> findById(@PathVariable Long id) {
     Optional<Usuario> usuarioOptional = usuarioService.findById(id);

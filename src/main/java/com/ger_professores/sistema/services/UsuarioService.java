@@ -1,10 +1,13 @@
 package com.ger_professores.sistema.services;
 
+import com.ger_professores.sistema.enums.StatusAtivo;
 import com.ger_professores.sistema.models.User;
 import com.ger_professores.sistema.models.Usuario;
 import com.ger_professores.sistema.models.exceptions.ResourceNotFoundException;
 import com.ger_professores.sistema.repositories.UserRepository;
 import com.ger_professores.sistema.repositories.UsuarioRepository;
+
+import ch.qos.logback.core.status.Status;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +37,10 @@ public class UsuarioService {
 
   public Optional<Usuario> findFirstByEmail(String email) {
     return Optional.ofNullable(usuarioRepository.findFirstByUsuarioEmail(email));
+  }
+
+  public List<Usuario> buscarObjetosAtivos() {
+    return usuarioRepository.findByStatusAtivo(StatusAtivo.ATIVADO);
   }
 
   @Transactional

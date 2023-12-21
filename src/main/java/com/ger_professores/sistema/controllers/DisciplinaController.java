@@ -46,6 +46,16 @@ public class DisciplinaController {
     return ResponseEntity.status(HttpStatus.OK).body(disciplinaResponses);
   }
 
+  @GetMapping("/disciplinas-ativos")
+  public ResponseEntity<List<DisciplinaResponse>> listarObjetosAtivos() {
+    List<Disciplina> disciplinas = disciplinaService.buscarObjetosAtivos();
+    List<DisciplinaResponse> disciplinaResponses = disciplinas
+        .stream()
+        .map(a -> new ModelMapper().map(a, DisciplinaResponse.class))
+        .collect(Collectors.toList());
+    return ResponseEntity.status(HttpStatus.OK).body(disciplinaResponses);
+  }
+
   @GetMapping("/{id}")
   public ResponseEntity<DisciplinaResponse> findById(@PathVariable Long id) {
     Optional<Disciplina> disciplinaOptional = disciplinaService.findById(id);

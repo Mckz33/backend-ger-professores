@@ -2,9 +2,12 @@ package com.ger_professores.sistema.controllers;
 
 import com.ger_professores.sistema.dtos.requests.CursoRequest;
 import com.ger_professores.sistema.dtos.responses.CursoResponse;
+import com.ger_professores.sistema.enums.StatusAtivo;
 import com.ger_professores.sistema.models.Curso;
 import com.ger_professores.sistema.models.exceptions.ResourceNotFoundException;
 import com.ger_professores.sistema.services.CursoService;
+
+import ch.qos.logback.core.joran.action.StatusListenerAction;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +37,16 @@ public class CursoController {
   @GetMapping
   public ResponseEntity<List<CursoResponse>> findAll() {
     List<Curso> cursos = cursoService.findAll();
+    List<CursoResponse> cursoResponses = cursos
+        .stream()
+        .map(a -> new ModelMapper().map(a, CursoResponse.class))
+        .collect(Collectors.toList());
+    return ResponseEntity.status(HttpStatus.OK).body(cursoResponses);
+  }
+
+  @GetMapping("/cursos-ativos")
+  public ResponseEntity<List<CursoResponse>> listarObjetosAtivos() {
+    List<Curso> cursos = cursoService.buscarObjetosAtivos();
     List<CursoResponse> cursoResponses = cursos
         .stream()
         .map(a -> new ModelMapper().map(a, CursoResponse.class))
