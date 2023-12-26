@@ -7,7 +7,6 @@ import com.ger_professores.sistema.models.exceptions.ResourceNotFoundException;
 import com.ger_professores.sistema.repositories.UserRepository;
 import com.ger_professores.sistema.repositories.UsuarioRepository;
 
-import ch.qos.logback.core.status.Status;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;

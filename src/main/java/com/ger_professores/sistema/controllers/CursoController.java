@@ -2,12 +2,10 @@ package com.ger_professores.sistema.controllers;
 
 import com.ger_professores.sistema.dtos.requests.CursoRequest;
 import com.ger_professores.sistema.dtos.responses.CursoResponse;
-import com.ger_professores.sistema.enums.StatusAtivo;
 import com.ger_professores.sistema.models.Curso;
 import com.ger_professores.sistema.models.exceptions.ResourceNotFoundException;
 import com.ger_professores.sistema.services.CursoService;
 
-import ch.qos.logback.core.joran.action.StatusListenerAction;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
